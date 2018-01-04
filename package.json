@@ -1,0 +1,35 @@
+{
+  "name": "node-postgresql-example",
+  "version": "1.0.0",
+  "description": "Node project using PostgreSQL",
+  "main": "dist/index.js",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jalik/node-postgresql-example.git"
+  },
+  "scripts": {
+    "build": "./node_modules/.bin/gulp build",
+    "start": "npm run build && node ./dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "./node_modules/.bin/gulp watch"
+  },
+  "author": {
+    "name": "Karl STEIN",
+    "email": "karl.stein.pro@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "pg": "^6.4.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.0",
+    "gulp-strip-comments": "^2.5.1",
+    "gulp-watch": "^4.3.11",
+    "remove-comments-loader": "^0.1.2"
+  }
+}
