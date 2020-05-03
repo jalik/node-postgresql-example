@@ -1,31 +1,48 @@
-const gulp = require("gulp");
-const babel = require("gulp-babel");
-const stripComments = require('gulp-strip-comments');
-const watch = require("gulp-watch");
+const babel = require('gulp-babel');
+const del = require('del');
+const eslint = require('gulp-eslint');
+const gulp = require('gulp');
+const path = require('path');
 
-const pkg = require("./package.json");
-const distDir = "dist";
+const buildPath = path.resolve('dist');
+const srcPath = path.resolve('src');
+const testPath = path.resolve('test');
 
-// Compile JavaScript files
-gulp.task("build:js", function () {
-    return gulp.src([
-        "src/js/**/*.js"
-    ])
-        .pipe(babel({presets: ["env"]}))
-        .pipe(stripComments())
-        .pipe(gulp.dest(`${distDir}`));
-});
+// Compile JS files
+gulp.task('build', () => gulp.src([
+  path.join(srcPath, '**', '*.js'),
+]).pipe(babel())
+  .pipe(gulp.dest(buildPath)));
 
-// Concat + compile files
-gulp.task("build", ["build:js"]);
+// Delete previous compiled files
+gulp.task('clean', () => del([
+  buildPath,
+]));
 
-// Concat + compress files
-gulp.task("default", ["build"]);
+// Run JS lint
+gulp.task('eslint', () => gulp.src([
+  path.join(srcPath, '**', '*.js'),
+  path.join(testPath, '**', '*.js'),
+  path.join('!node_modules', '**'),
+]).pipe(eslint())
+  .pipe(eslint.formatEach())
+  .pipe(eslint.failAfterError()));
 
-// Concat + compress files
-gulp.task("prepublish", ["build"]);
+// Prepare files for production
+gulp.task('prepare', gulp.series(
+  'clean',
+  'build',
+  'eslint',
+));
 
-// Automatic rebuild
-gulp.task("watch", function () {
-    gulp.watch(["src/**/*.js"], ["build:js"]);
-});
+// Rebuild JS automatically
+gulp.task('watch', () => gulp.watch([
+  path.join(srcPath, '**', '*.js'),
+], gulp.parallel(
+  'build:js',
+)));
+
+// Default task
+gulp.task('default', gulp.series(
+  'prepare',
+));

@@ -9,27 +9,35 @@
     "url": "https://github.com/jalik/node-postgresql-example.git"
   },
   "scripts": {
-    "build": "./node_modules/.bin/gulp build",
-    "start": "npm run build && node ./dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "./node_modules/.bin/gulp watch"
+    "build": "npx gulp build",
+    "lint": "npx eslint .",
+    "lint-fix": "npx eslint --fix .",
+    "prepare": "npx gulp prepare",
+    "prepublishOnly": "npm test",
+    "start": "npm run build && nodemon ./dist/index.js",
+    "test": "npx jest",
+    "watch": "npx gulp watch"
   },
   "author": {
     "name": "Karl STEIN",
     "email": "karl.stein.pro@gmail.com"
   },
   "license": "MIT",
-  "dependencies": {
-    "pg": "^6.4.2"
-  },
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^7.0.1",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "del": "^5.1.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jest": "^23.8.2",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-eslint": "^6.0.0",
     "gulp-strip-comments": "^2.5.2",
-    "gulp-watch": "^4.3.11",
-    "remove-comments-loader": "^0.1.2"
+    "nodemon": "^2.0.3",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "pg": "^8.0.3"
   }
 }
