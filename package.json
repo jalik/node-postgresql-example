@@ -23,12 +23,12 @@
     "pg": "^6.4.2"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "gulp": "^3.9.1",
-    "gulp-babel": "^7.0.0",
-    "gulp-strip-comments": "^2.5.1",
+    "gulp-babel": "^7.0.1",
+    "gulp-strip-comments": "^2.5.2",
     "gulp-watch": "^4.3.11",
     "remove-comments-loader": "^0.1.2"
   }
